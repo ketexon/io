@@ -76,16 +76,6 @@ add_custom_command(
 	DEPENDS io2c
 )
 
-# Include dirs, -I flags and whatnot
-include_directories(
-	${CMAKE_CURRENT_SOURCE_DIR}/iovm/source
-	${CMAKE_CURRENT_SOURCE_DIR}/../deps/parson
-	${CMAKE_CURRENT_SOURCE_DIR}/basekit/source
-	${CMAKE_CURRENT_SOURCE_DIR}/basekit/source/simd_cph/include
-	${CMAKE_CURRENT_SOURCE_DIR}/coroutine/source
-	${CMAKE_CURRENT_SOURCE_DIR}/garbagecollector/source
-)
-
 # Add a file to our library sources.
 list(APPEND IOVMALL_STATIC_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/iovm/source/IoVMInit.c) # Because we generate it
 
@@ -93,6 +83,18 @@ list(APPEND IOVMALL_STATIC_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/iovm/source/IoVMInit
 # up top.
 add_library(iovmall_static STATIC ${IOVMALL_STATIC_SRCS})
 add_dependencies(iovmall_static io2c basekit coroutine garbagecollector iovmall)
+
+# Include dirs, -I flags and whatnot
+target_include_directories(
+	iovmall_static
+	PUBLIC
+	${CMAKE_CURRENT_SOURCE_DIR}/iovm/source
+	${CMAKE_CURRENT_SOURCE_DIR}/../deps/parson
+	${CMAKE_CURRENT_SOURCE_DIR}/basekit/source
+	${CMAKE_CURRENT_SOURCE_DIR}/basekit/source/simd_cph/include
+	${CMAKE_CURRENT_SOURCE_DIR}/coroutine/source
+	${CMAKE_CURRENT_SOURCE_DIR}/garbagecollector/source
+)
 
 # Define the subdirectories we can reach from here that we want
 # to go into and build stuff.
