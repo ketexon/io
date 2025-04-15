@@ -99,7 +99,7 @@ set(IOVM_SOURCE_DIR ${PROJECT_SOURCE_DIR}/libs/iovm/source)
 
 # Subdirectories. These directories should have their own CMakeLists.txt.
 add_subdirectory(libs)
-add_subdirectory(tools)
+# add_subdirectory(tools)
 
 # Ensure the _build hierarchy is created top-level, this is where our
 # binaries go.
